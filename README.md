@@ -26,6 +26,8 @@ The app architecture, project and code organization, file structure and comments
 
 ### Technical Details:
 
+* **Language:** Java
+* **Tests:** Automated tests are very important
 * **Documentation:** [Google Maps API](https://developers.google.com/maps/documentation/geocoding/)
 * **API call example:** http://maps.googleapis.com/maps/api/geocode/json?address=Springfield&sensor=false
 * **Location name key to be used:** `formatted_address`
