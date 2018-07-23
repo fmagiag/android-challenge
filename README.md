@@ -7,7 +7,7 @@ The app architecture, project and code organization, file structure and comments
 
 1. The app should support Android 4 and later. The look and feel is the system's default.
 1. Text field on the top of the screen.
-1. Tapping search button makes the search through the call to the Google Maps API.
+1. Tapping search button makes the search through the call to the MapQuest API.
 1. The UI must be responsive while searching through the API call.
 1. The results must be listed in the same order as received by the API response. Each item in the list should show the name of the related location.
 1. If there is only one result, display only one row in the list.
@@ -26,12 +26,12 @@ The app architecture, project and code organization, file structure and comments
 
 ### Technical Details:
 
-* **Language:** Java
+* **Language:** Java/Kotlin
 * **Tests:** Automated tests are very important
-* **Documentation:** [Google Maps API](https://developers.google.com/maps/documentation/geocoding/)
-* **API call example:** http://maps.googleapis.com/maps/api/geocode/json?address=Springfield&sensor=false
-* **Location name key to be used:** `formatted_address`
-* **Location coordinates key path:** `geometry.location`
+* **Documentation:** [MapQuest API](https://developer.mapquest.com/documentation/geocoding-api/address/get/)
+* **API call example:** http://www.mapquestapi.com/geocoding/v1/address?key=YOUR-KEY&location=Springfield
+* **Location name key to be used:** `adminArea5`
+* **Location coordinates key path:** `latLng`
 
 ### Notes
 
