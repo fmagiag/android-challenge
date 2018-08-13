@@ -1,41 +1,92 @@
 # Android Test
 
-We need you to create an app that allows users to make searches for locations and present the results in a list, allowing them to be presented in a map view inside the app.  
-The app architecture, project and code organization, file structure and comments will be evaluated.
 
-### Acceptance Criteria:
+## <a name="MOB-01"></a> MOB-01 - TV Shows home screen
 
-1. The app should support Android 4 and later. The look and feel is the system's default.
-1. Text field on the top of the screen.
-1. Tapping search button makes the search through the call to the MapQuest API.
-1. The UI must be responsive while searching through the API call.
-1. The results must be listed in the same order as received by the API response. Each item in the list should show the name of the related location.
-1. If there is only one result, display only one row in the list.
-1. if there are more than one results, show a row for "Display All on Map" in a separated section.
-1. Selecting this row would display the map with all results centered.
-1. If there is no results, a "No Results" text should be displayed in the view instead of the result rows.
-1. Selecting one item in the list should present a map view with all result items presented as markers. The selected marker should be centered. Feel free to set the zoom level.
-1. Selecting a marker in the map view should present its location name and coordinates in the marker title.
-1. In the Map screen, add a "Save" button to the action bar, allowing the user to save the selected result object. This action should save the current object to a SQLite database and the object should be unique in the database.
-    * **This is not applicable to the "Display All on Map" option.**
-1. Case the object has been previously saved, the "Save" button should become into a "Delete" button. Tapping this button will delete the current object from the database, after popping up a dialog confirming the deletion. User should be able to "Cancel" or "Delete" the item from the presented dialog.
-    * **This is not applicable to the "Display All on Map" option.**
-1. Provide unit tests for models, activities and fragments, using the Android Testing API.
+As a user I want to see a list of existent TV Shows. I should be able to save or delete a TV Show as favorite.
+
+### Acceptance Criteria
+
+- This screen should be the first when the App opens
+- This screen should look like the layout [attached](assets/Android Challenge.png)
+- When **_Shows_** tab is selected then the TV Shows list should be shown `(/shows?page=:num)`
+- When **_Favorites_** tab [MOB-03](#MOB-03) is selected then my favorites shows should be listed.
+- The favorites list needs to be accessed offline. You can choose how to save the TV Show.
+- The list item should have:
+  - Poster `{image.medium}`
+  - Name `{name}`
+  - Button
+- The poster image have to be cached
+- The button should save or delete the TV Show as favorite
+  - When the TV Show is **not** saved, then the save icon ([ic_save](assets/ic_save.svg)) should be used
+  - When the TV Show is **saved** , then the remove icon ([ic_remove](assets/ic_remove.svg)) should be used
+- When deleting a saved TV Show, a confirmation dialog should be shown to confirm deletion.
+- When the user click on the row then the details screen [MOB-02](#MOB-02) should be opened
+- The TV Show should be an endless list, and the request has to be paged
+- When any user action fails, then a retry dialog should be shown. The retry dialog should have:
+  - Title:
+  		- Oops, something went wrong
+  - Description:
+    - For saving/removing favorite:
+      - There was a problem saving/deleting this TV Show. Do you want to try again?
+    - For timeout/no connection:
+      - An error occurred while fetching data. Do you want to try again?
+  - Cancel option
+  - Retry option
 
 
 
-### Technical Details:
+## <a name="MOB-02"></a> MOB-02 - Details Screen
 
-* **Language:** Java/Kotlin
-* **Tests:** Automated tests are very important
-* **Documentation:** [MapQuest API](https://developer.mapquest.com/documentation/geocoding-api/address/get/)
-* **API call example:** http://www.mapquestapi.com/geocoding/v1/address?key=YOUR-KEY&location=Springfield
-* **Location name key to be used:** `adminArea5`
-* **Location coordinates key path:** `latLng`
+As a user I want to see the details information of existent TV Shows and then I should be able to remove or add the TV Show to favorite list.
+
+### Acceptance Criteria
+
+- This screen should have the same identity as the list screen [MOB-01](#MOB-01), but the layout is up to you
+- The screen title should be the TV Show&#39;s name
+- The screen should have:
+  - Poster `{image.large}`
+  - Summary `{summary}`
+  - IMDb `{externals.imdb}`
+  - Cast list `(/shows/:id/cast)`
+- When the user clicks on IMDb link, then the TV Show page `(https://www.imdb.com/title/:id)` should be opened in the default browser app
+- When there is **no** imdb id, then the link should not be visible
+- The Toolbar should have an action item to save or delete the TV show from favorites.
+  - When the TV Show is **not** saved, then the save icon ([ic_save](assets/ic_save.svg))) should be used
+  - When the TV Show is **saved** , then the remove icon ([ic_remove](assets/ic_remove.svg)) should be used
+- The cast list needs to have:
+  - Person Picture `{person.image.medium}`
+  - Name `{person.name}`
+  - Character Name `{character.name}`
+- When the cast list is loading, then an indeterminate progress bar should be shown as a placeholder
+
+
+##<a name="MOB-03"></a> MOB-03 - Favorites Screen
+
+As a user I want to see all the TV Shows I marked as favorites, having the option to delete them from my favorites.
+
+### Acceptance Criteria
+
+- This screen should look like the TV Shows screen
+- This screen should have all the user&#39;s saved TV Shows
+- User needs to have the option to delete a TV Show from favorites
+- When deleting a TV Show, a popup needs to be shown to confirm deletion
+- After deletion, TV Show needs to be removed from Favorites List and database
+- When the user click on the row then the details screen [MOB-01](#MOB-01) should be opened
+
+
+## Technical Details:
+
+* **Language:** Java or Kotlin
+* **Animations:** Nice to have
+* **Tests:** Unit tests and Automated tests, both important
+* **Documentation:** `http://www.tvmaze.com/api`
+* **API call example:** `http://api.tvmaze.com/shows?page=1`
 
 ### Notes
 
-* This assessment must be delivered within 2 days.
+* You can find all the assets [here](assets)
+* This assessment must be delivered within 3 days.
 * You can use whatever third party library you want to accomplish these requirements.
 * You must provide a COMMENTS.txt (plain text) or a COMMENTS.md (Markdown) file at the root of your repository, explaining:
 
