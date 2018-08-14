@@ -8,31 +8,31 @@ As a user I want to see a list of existent TV Shows. I should be able to save or
 ### Acceptance Criteria
 
 - This screen should be the first when the App opens
-- This screen should look like the layout [attached](./assets/Android Challenge.png)
+- This screen should look like the layout [attached](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/Android Challenge.png)
 - When **_Shows_** tab is selected then the TV Shows list should be shown `(/shows?page=:num)`
-- When **_Favorites_** tab [MOB-03](#MOB-03) is selected then my favorites shows should be listed.
+- When **_Favorites_** tab (MOB-03) is selected then my favorites shows should be listed.
 - The favorites list needs to be accessed offline. You can choose how to save the TV Show.
 - The list item should have:
-  - Poster `{image.medium}`
-  - Name `{name}`
-  - Button
+	- Poster `{image.medium}`
+	- Name `{name}`
+	- Button
 - The poster image have to be cached
 - The button should save or delete the TV Show as favorite
-  - When the TV Show is **not** saved, then the save icon ([ic_save](./assets/ic_save.svg)) should be used
-  - When the TV Show is **saved** , then the remove icon ([ic_remove](./assets/ic_remove.svg)) should be used
+	- When the TV Show is **not** saved, then the save icon ([ic_save](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/ic_save.svg)) should be used
+	- When the TV Show is **saved** , then the remove icon ([ic_remove](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/ic_remove.svg)) should be used
 - When deleting a saved TV Show, a confirmation dialog should be shown to confirm deletion.
-- When the user click on the row then the details screen [MOB-02](#MOB-02) should be opened
+- When the user click on the row then the details screen (MOB-02) should be opened
 - The TV Show should be an endless list, and the request has to be paged
 - When any user action fails, then a retry dialog should be shown. The retry dialog should have:
-  - Title:
-  		- Oops, something went wrong
-  - Description:
-    - For saving/removing favorite:
-      - There was a problem saving/deleting this TV Show. Do you want to try again?
-    - For timeout/no connection:
-      - An error occurred while fetching data. Do you want to try again?
-  - Cancel option
-  - Retry option
+	- Title:
+		- Oops, something went wrong
+	- Description:
+		- For saving/removing favorite:
+		- There was a problem saving/deleting this TV Show. Do you want to try again?
+	- For timeout/no connection:
+		- An error occurred while fetching data. Do you want to try again?
+	- Cancel option
+	- Retry option
 
 
 
@@ -42,22 +42,22 @@ As a user I want to see the details information of existent TV Shows and then I 
 
 ### Acceptance Criteria
 
-- This screen should have the same identity as the list screen [MOB-01](#MOB-01), but the layout is up to you
-- The screen title should be the TV Show&#39;s name
+- This screen should have the same identity as the list screen (MOB-01), but the layout is up to you
+- The screen title should be the TV Show's name
 - The screen should have:
-  - Poster `{image.large}`
-  - Summary `{summary}`
-  - IMDb `{externals.imdb}`
-  - Cast list `(/shows/:id/cast)`
+	- Poster `{image.large}`
+	- Summary `{summary}`
+	- IMDb `{externals.imdb}`
+	- Cast list `(/shows/:id/cast)`
 - When the user clicks on IMDb link, then the TV Show page `(https://www.imdb.com/title/:id)` should be opened in the default browser app
 - When there is **no** imdb id, then the link should not be visible
 - The Toolbar should have an action item to save or delete the TV show from favorites.
-  - When the TV Show is **not** saved, then the save icon ([ic_save](./assets/ic_save.svg))) should be used
-  - When the TV Show is **saved** , then the remove icon ([ic_remove](./assets/ic_remove.svg)) should be used
+	- When the TV Show is **not** saved, then the save icon ([ic_save](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/ic_save.svg))) should be used
+	- When the TV Show is **saved** , then the remove icon ([ic_remove](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/ic_remove.svg)) should be used
 - The cast list needs to have:
-  - Person Picture `{person.image.medium}`
-  - Name `{person.name}`
-  - Character Name `{character.name}`
+	- Person Picture `{person.image.medium}`
+	- Name `{person.name}`
+	- Character Name `{character.name}`
 - When the cast list is loading, then an indeterminate progress bar should be shown as a placeholder
 
 
@@ -68,11 +68,11 @@ As a user I want to see all the TV Shows I marked as favorites, having the optio
 ### Acceptance Criteria
 
 - This screen should look like the TV Shows screen
-- This screen should have all the user&#39;s saved TV Shows
+- This screen should have all the user's saved TV Shows
 - User needs to have the option to delete a TV Show from favorites
 - When deleting a TV Show, a popup needs to be shown to confirm deletion
 - After deletion, TV Show needs to be removed from Favorites List and database
-- When the user click on the row then the details screen [MOB-01](#MOB-01) should be opened
+- When the user click on the row then the details screen (MOB-02) should be opened
 
 
 ## Technical Details:
@@ -85,7 +85,7 @@ As a user I want to see all the TV Shows I marked as favorites, having the optio
 
 ### Notes
 
-* You can find all the assets [here](./assets)
+* You can find all the assets [here](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/)
 * This assessment must be delivered within 3 days.
 * You can use whatever third party library you want to accomplish these requirements.
 * You must provide a COMMENTS.txt (plain text) or a COMMENTS.md (Markdown) file at the root of your repository, explaining:
