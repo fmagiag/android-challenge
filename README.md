@@ -52,7 +52,7 @@ As a user I want to see the details information of existent TV Shows and then I 
 - When the user clicks on IMDb link, then the TV Show page `(https://www.imdb.com/title/:id)` should be opened in the default browser app
 - When there is **no** imdb id, then the link should not be visible
 - The Toolbar should have an action item to save or delete the TV show from favorites.
-	- When the TV Show is **not** saved, then the save icon ([ic_save](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/ic_save.svg))) should be used
+	- When the TV Show is **not** saved, then the save icon ([ic_save](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/ic_save.svg)) should be used
 	- When the TV Show is **saved** , then the remove icon ([ic_remove](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/ic_remove.svg)) should be used
 - The cast list needs to have:
 	- Person Picture `{person.image.medium}`
