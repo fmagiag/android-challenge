@@ -22,7 +22,6 @@ As a user I want to see a list of existent TV Shows. I should be able to save or
 	- When the TV Show is **saved** , then the remove icon ([ic_remove](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/ic_remove.svg)) should be used
 - When deleting a saved TV Show, a confirmation dialog should be shown to confirm deletion.
 - When the user click on the row then the details screen (MOB-02) should be opened
-- The TV Show should be an endless list, and the request has to be paged
 - When any user action fails, then a retry dialog should be shown. The retry dialog should have:
 	- Title:
 		- Oops, something went wrong
@@ -48,17 +47,11 @@ As a user I want to see the details information of existent TV Shows and then I 
 	- Poster `{image.large}`
 	- Summary `{summary}`
 	- IMDb `{externals.imdb}`
-	- Cast list `(/shows/:id/cast)`
 - When the user clicks on IMDb link, then the TV Show page `(https://www.imdb.com/title/:id)` should be opened in the default browser app
 - When there is **no** imdb id, then the link should not be visible
 - The Toolbar should have an action item to save or delete the TV show from favorites.
 	- When the TV Show is **not** saved, then the save icon ([ic_save](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/ic_save.svg))) should be used
-	- When the TV Show is **saved** , then the remove icon ([ic_remove](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/ic_remove.svg)) should be used
-- The cast list needs to have:
-	- Person Picture `{person.image.medium}`
-	- Name `{person.name}`
-	- Character Name `{character.name}`
-- When the cast list is loading, then an indeterminate progress bar should be shown as a placeholder
+	- When the TV Show is **saved** , then the remove icon ([ic_remove](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/ic_remove.svg))a should be used
 
 
 ## MOB-03 - Favorites Screen
@@ -71,22 +64,22 @@ As a user I want to see all the TV Shows I marked as favorites, having the optio
 - This screen should have all the user's saved TV Shows
 - User needs to have the option to delete a TV Show from favorites
 - When deleting a TV Show, a popup needs to be shown to confirm deletion
-- After deletion, TV Show needs to be removed from Favorites List and database
+- After deletion, TV Show needs to be removed from Favorites List and from the persistence
 - When the user click on the row then the details screen (MOB-02) should be opened
 
 
 ## Technical Details:
 
 * **Language:** Java or Kotlin
-* **Animations:** Nice to have
-* **Tests:** Unit tests and Automated tests, both important
+* **Persistence:** Any type of persistence can be used
+* **Tests:** Unit tests are important
 * **Documentation:** `http://www.tvmaze.com/api`
 * **API call example:** `http://api.tvmaze.com/shows?page=1`
 
 ### Notes
 
 * You can find all the assets [here](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/)
-* This assessment must be delivered within 3 days.
+* This assessment must be delivered within 2 days.
 * You can use whatever third party library you want to accomplish these requirements.
 * You must provide a COMMENTS.txt (plain text) or a COMMENTS.md (Markdown) file at the root of your repository, explaining:
 
