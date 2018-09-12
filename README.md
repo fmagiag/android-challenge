@@ -18,8 +18,8 @@ As a user I want to see a list of existent TV Shows. I should be able to save or
 	- Button
 - The poster image have to be cached
 - The button should save or delete the TV Show as favorite
-	- When the TV Show is **not** saved, then the save icon ([ic_save](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/ic_save.svg)) should be used
-	- When the TV Show is **saved** , then the remove icon ([ic_remove](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/ic_remove.svg)) should be used
+	- When the TV Show is **not** saved, then the remove icon ([ic_remove](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/ic_remove.svg)) should be used
+	- When the TV Show is **saved** , then the save icon ([ic_save](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/ic_save.svg)) should be used
 - When deleting a saved TV Show, a confirmation dialog should be shown to confirm deletion.
 - When the user click on the row then the details screen (MOB-02) should be opened
 - When any user action fails, then a retry dialog should be shown. The retry dialog should have:
@@ -50,8 +50,8 @@ As a user I want to see the details information of existent TV Shows and then I 
 - When the user clicks on IMDb link, then the TV Show page `(https://www.imdb.com/title/:id)` should be opened in the default browser app
 - When there is **no** imdb id, then the link should not be visible
 - The Toolbar should have an action item to save or delete the TV show from favorites.
-	- When the TV Show is **not** saved, then the save icon ([ic_save](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/ic_save.svg))) should be used
-	- When the TV Show is **saved** , then the remove icon ([ic_remove](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/ic_remove.svg))a should be used
+	- When the TV Show is **not** saved, then the remove icon ([ic_remove](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/ic_remove.svg)) should be used
+	- When the TV Show is **saved** , then the save icon ([ic_save](https://bitbucket.org/ac-recruitment/android-challenge/src/master/assets/ic_save.svg)) a should be used
 
 
 ## MOB-03 - Favorites Screen
@@ -92,7 +92,7 @@ As a user I want to see all the TV Shows I marked as favorites, having the optio
 
 ### Delivery Instructions
 
-1. You must provide his BitBucket username. A free BitBucket account can be created at http://bitbucket.org
+1. You must provide yours BitBucket username. A free BitBucket account can be created at http://bitbucket.org
 1. The recruiter will give you read permission to a repository named **android-challenge**, at https://bitbucket.org/ac-recruitment/android-challenge
 1. You must fork this repository into a private repository on your own account and push your code in there.
 1. Once finished, you must give the user **ac-recruitment** read permission on your repository so that you can be evaluated. Then, please contact back your recruiter and he will get an engineer to evaluate your test.
