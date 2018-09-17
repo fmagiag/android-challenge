@@ -95,7 +95,7 @@ As a user I want to see all the TV Shows I marked as favorites, having the optio
 1. You must provide yours BitBucket username. A free BitBucket account can be created at http://bitbucket.org
 1. The recruiter will give you read permission to a repository named **android-challenge**, at https://bitbucket.org/ac-recruitment/android-challenge
 1. You must fork this repository into a private repository on your own account and push your code in there.
-1. Once finished, you must give the user **ac-recruitment** read permission on your repository so that you can be evaluated. Then, please contact back your recruiter and he will get an engineer to evaluate your test.
+1. Once finished, you must give the user **ac.recruitment@avenuecode.com (ac-recruitment)** read permission on your repository so that you can be evaluated. Then, please contact back your recruiter and he will get an engineer to evaluate your test.
 1. After you are evaluated, the recruiter will remove your read permission from the original repository.
 
 Thank you,  
