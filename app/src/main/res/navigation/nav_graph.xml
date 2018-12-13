@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/shows_navigation">
+
+    <fragment
+        android:id="@+id/shows_navigation"
+        android:name="com.magiag.androidchallenge.ShowsFragment"
+        android:label="FlowNavigationMenu" >
+    </fragment>
+    <fragment
+        android:id="@+id/favorites_navigation"
+        android:name="com.magiag.androidchallenge.FavoritesFragment"
+        android:label="FlowFavoritesFragment" >
+    </fragment>
+</navigation>

@@ -41,7 +41,10 @@ ext {
     material = '1.1.0-alpha02'
     vectordrawable = '1.1.0-alpha01'
     constraintLayout = '2.0.0-alpha2'
-    gsonVersion = '2.8.5'
+    legacySupport = '1.0.0'
+
+    // Navigation
+    navigationVersion = '1.0.0-alpha08'
 
     //Test dependencies
     junitVersion = '4.12'
@@ -58,6 +61,9 @@ ext {
     // Rx Java
     rxJavaVersion = '2.2.4'
     rxAndroidVersion = '2.1.0'
+
+    // Gson
+    gsonVersion = '2.8.5'
 
     // Retrofit
     retrofit = '2.5.0'

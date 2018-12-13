@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -23,11 +24,17 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     // App dependencies
     implementation "androidx.appcompat:appcompat:$rootProject.appcompat"
     implementation "com.google.android.material:material:$rootProject.material"
     implementation "androidx.vectordrawable:vectordrawable:$rootProject.vectordrawable"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayout"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.legacySupport"
+
+    // Navigation
+    implementation "android.arch.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
+    implementation "android.arch.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
 
     //Test dependencies
     testImplementation "junit:junit:$rootProject.junitVersion"
@@ -40,7 +47,7 @@ dependencies {
 
     // Room
     implementation "androidx.room:room-runtime:$rootProject.room"
-    annotationProcessor "androidx.room:room-compiler:$rootProject.room"
+    kapt "androidx.room:room-compiler:$rootProject.room"
 
     // Rx Java
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxJavaVersion"
