@@ -11,6 +11,9 @@ import com.magiag.androidchallenge.R
 import com.magiag.androidchallenge.data.entity.ShowEntity
 import androidx.recyclerview.widget.RecyclerView
 
+import com.bumptech.glide.load.resource.bitmap.TransformationUtils.centerCrop
+import com.magiag.androidchallenge.GlideApp
+
 class ShowsAdapter(private val mShows: List<ShowEntity>, private val mContext: Context) : RecyclerView.Adapter<ShowsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowsAdapter.ViewHolder {
@@ -22,6 +25,11 @@ class ShowsAdapter(private val mShows: List<ShowEntity>, private val mContext: C
     override fun onBindViewHolder(holder: ShowsAdapter.ViewHolder, position: Int) {
         val showEntity = mShows[position]
         holder.tvName.text = showEntity.name
+        GlideApp.with(mContext)
+                .load(showEntity.image!!.medium!!)
+                .centerCrop()
+                .placeholder(R.drawable.ic_placeholder)
+                .into(holder.ivCover)
     }
 
     override fun getItemCount(): Int {
