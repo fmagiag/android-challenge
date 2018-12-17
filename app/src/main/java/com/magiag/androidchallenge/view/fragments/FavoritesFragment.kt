@@ -1,21 +1,19 @@
 package com.magiag.androidchallenge.view.fragments
 
-
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.magiag.androidchallenge.R
+import com.magiag.androidchallenge.databinding.FragFavoritesBinding
+import com.magiag.androidchallenge.viewmodel.FavoritesViewModel
 
-class FavoritesFragment : Fragment() {
+class FavoritesFragment : BaseFragment<FragFavoritesBinding, FavoritesViewModel>() {
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.frag_favorites, container, false)
+    override fun getFragmentLayout(): Int {
+        return R.layout.frag_favorites
+    }
+
+    override fun getViewModelClass(): Class<FavoritesViewModel>? {
+        return FavoritesViewModel::class.java
+    }
+
+    override fun initBinding() {
     }
 }

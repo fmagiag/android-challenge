@@ -1,21 +1,36 @@
 package com.magiag.androidchallenge.view.fragments
 
-
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.magiag.androidchallenge.R
+import com.magiag.androidchallenge.data.entity.ShowEntity
+import com.magiag.androidchallenge.databinding.FragShowsBinding
+import com.magiag.androidchallenge.view.adapters.ShowsAdapter
+import com.magiag.androidchallenge.viewmodel.ShowsViewModel
 
-class ShowsFragment : Fragment() {
+class ShowsFragment : BaseFragment<FragShowsBinding, ShowsViewModel>() {
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.frag_shows, container, false)
+    lateinit var bind: FragShowsBinding
+    lateinit var viewmodel: ShowsViewModel
+
+    override fun getFragmentLayout(): Int {
+        return R.layout.frag_shows
     }
+
+    override fun getViewModelClass(): Class<ShowsViewModel>? {
+        return ShowsViewModel::class.java
+    }
+
+    override fun initBinding() {
+        bind = binding()
+        viewmodel = viewModel()
+        viewmodel.OnShowsResult().observe(this, Observer<List<ShowEntity>> { this.onShowsResult(it) })
+        viewmodel.getShows(1)
+    }
+
+    private fun onShowsResult(list: List<ShowEntity>){
+        val adapter = ShowsAdapter(list, context!!)
+        bind.rvList.layoutManager = LinearLayoutManager(context)
+        bind.rvList.setHasFixedSize(true)
+        bind.rvList.adapter = adapter }
 }
