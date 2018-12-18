@@ -12,20 +12,21 @@ import com.magiag.androidchallenge.data.entity.ShowEntity
 import androidx.recyclerview.widget.RecyclerView
 import com.magiag.androidchallenge.GlideApp
 
-class ShowsAdapter(private val mShows: List<ShowEntity>, private val mContext: Context) : RecyclerView.Adapter<ShowsAdapter.ViewHolder>() {
+class FavoritesAdapter(private val mShows: List<ShowEntity>, private val mContext: Context) : RecyclerView.Adapter<FavoritesAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowsAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.item_show, parent, false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ShowsAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavoritesAdapter.ViewHolder, position: Int) {
         val showEntity = mShows[position]
         holder.tvName.text = showEntity.name
+        holder.ivAction.setImageResource(R.drawable.ic_remove)
         GlideApp.with(mContext)
                 .load(showEntity.image!!.medium!!)
-                .skipMemoryCache(true)
+                .onlyRetrieveFromCache(true)
                 .centerCrop()
                 .placeholder(R.drawable.ic_placeholder)
                 .into(holder.ivCover)

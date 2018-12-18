@@ -26,7 +26,6 @@ class ShowsViewModel(application: Application) : BaseViewModel(application) {
     private val scope = CoroutineScope(coroutineContext)
     private val repository: ShowsBDRepository
 
-
     init {
         mShowsDataRepository = ShowsDataStore()
         val showDao = ShowRoomDatabase.getDatabase(application, scope).showDao()

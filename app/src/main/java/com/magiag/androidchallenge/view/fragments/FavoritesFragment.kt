@@ -1,10 +1,17 @@
 package com.magiag.androidchallenge.view.fragments
 
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.magiag.androidchallenge.R
+import com.magiag.androidchallenge.data.entity.ShowEntity
 import com.magiag.androidchallenge.databinding.FragFavoritesBinding
+import com.magiag.androidchallenge.view.adapters.FavoritesAdapter
 import com.magiag.androidchallenge.viewmodel.FavoritesViewModel
 
 class FavoritesFragment : BaseFragment<FragFavoritesBinding, FavoritesViewModel>() {
+
+    lateinit var bind: FragFavoritesBinding
+    lateinit var viewmodel: FavoritesViewModel
 
     override fun getFragmentLayout(): Int {
         return R.layout.frag_favorites
@@ -15,5 +22,14 @@ class FavoritesFragment : BaseFragment<FragFavoritesBinding, FavoritesViewModel>
     }
 
     override fun initBinding() {
+        bind = binding()
+        viewmodel = viewModel()
+        viewmodel.getAllShows().observe(this, Observer<List<ShowEntity>> { this.OnFavoritesResult(it) })
     }
+
+    private fun OnFavoritesResult(list: List<ShowEntity>){
+        val adapter = FavoritesAdapter(list, context!!)
+        bind.rvList.layoutManager = LinearLayoutManager(context)
+        bind.rvList.setHasFixedSize(true)
+        bind.rvList.adapter = adapter }
 }
