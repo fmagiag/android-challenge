@@ -70,4 +70,7 @@ ext {
 
     // Retrofit
     retrofitVersion = '2.5.0'
+
+    // Coroutines
+    coroutinesVersion = '1.0.1'
 }

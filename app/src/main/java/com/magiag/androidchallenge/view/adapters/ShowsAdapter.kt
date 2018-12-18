@@ -27,6 +27,7 @@ class ShowsAdapter(private val mShows: List<ShowEntity>, private val mContext: C
         holder.tvName.text = showEntity.name
         GlideApp.with(mContext)
                 .load(showEntity.image!!.medium!!)
+                .skipMemoryCache(true)
                 .centerCrop()
                 .placeholder(R.drawable.ic_placeholder)
                 .into(holder.ivCover)
