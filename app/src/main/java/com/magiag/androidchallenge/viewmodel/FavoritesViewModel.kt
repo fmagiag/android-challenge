@@ -1,4 +1,6 @@
 package com.magiag.androidchallenge.viewmodel
 
+import android.app.Application
 
-class FavoritesViewModel : BaseViewModel()
+
+class FavoritesViewModel(application: Application) : BaseViewModel(application)
