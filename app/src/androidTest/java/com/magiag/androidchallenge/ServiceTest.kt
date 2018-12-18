@@ -1,7 +1,7 @@
 package com.magiag.androidchallenge
 
-import com.magiag.androidchallenge.data.repository.ShowsDataRepository
-import com.magiag.androidchallenge.data.repository.ShowsDataStore
+import com.magiag.androidchallenge.data.repository.data.ShowsDataRepository
+import com.magiag.androidchallenge.data.repository.data.ShowsDataStore
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Before
 import org.junit.Test

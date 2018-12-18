@@ -1,4 +1,4 @@
-package com.magiag.androidchallenge.data.repository
+package com.magiag.androidchallenge.data.repository.data
 
 import com.magiag.androidchallenge.data.entity.ShowEntity
 import io.reactivex.Observable

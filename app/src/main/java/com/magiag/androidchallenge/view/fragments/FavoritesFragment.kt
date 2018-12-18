@@ -6,6 +6,7 @@ import com.magiag.androidchallenge.R
 import com.magiag.androidchallenge.data.entity.ShowEntity
 import com.magiag.androidchallenge.databinding.FragFavoritesBinding
 import com.magiag.androidchallenge.view.adapters.FavoritesAdapter
+import com.magiag.androidchallenge.view.base.BaseFragment
 import com.magiag.androidchallenge.viewmodel.FavoritesViewModel
 
 class FavoritesFragment : BaseFragment<FragFavoritesBinding, FavoritesViewModel>() {

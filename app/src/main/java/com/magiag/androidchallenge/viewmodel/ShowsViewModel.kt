@@ -4,10 +4,12 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.magiag.androidchallenge.data.database.ShowRoomDatabase
-import com.magiag.androidchallenge.data.database.ShowsBDRepository
+import com.magiag.androidchallenge.data.repository.model.ShowsModelStore
 import com.magiag.androidchallenge.data.entity.ShowEntity
-import com.magiag.androidchallenge.data.repository.ShowsDataRepository
-import com.magiag.androidchallenge.data.repository.ShowsDataStore
+import com.magiag.androidchallenge.data.repository.data.ShowsDataRepository
+import com.magiag.androidchallenge.data.repository.data.ShowsDataStore
+import com.magiag.androidchallenge.data.repository.model.ShowsModelRepository
+import com.magiag.androidchallenge.viewmodel.base.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -20,24 +22,26 @@ import kotlin.coroutines.CoroutineContext
 class ShowsViewModel(application: Application) : BaseViewModel(application) {
     private val mOnShowsResult = MutableLiveData<List<ShowEntity>>()
     private val mShowsDataRepository: ShowsDataRepository
-    private var parentJob = Job()
-    private val coroutineContext: CoroutineContext
-        get() = parentJob + Dispatchers.Main
-    private val scope = CoroutineScope(coroutineContext)
-    private val repository: ShowsBDRepository
+    private val mShowsModelRepository: ShowsModelRepository
+    private var mParentJob = Job()
+    private val mCoroutineContext: CoroutineContext
+        get() = mParentJob + Dispatchers.Main
+    private val mScope = CoroutineScope(mCoroutineContext)
 
     init {
         mShowsDataRepository = ShowsDataStore()
-        val showDao = ShowRoomDatabase.getDatabase(application, scope).showDao()
-        repository = ShowsBDRepository(showDao)
+        mShowsModelRepository = ShowsModelStore(ShowRoomDatabase
+                .getDatabase(application)
+                .showDao()
+        )
     }
 
     fun OnShowsResult(): MutableLiveData<List<ShowEntity>> {
         return mOnShowsResult
     }
 
-    fun insertAll(show: ShowEntity) = scope.launch(Dispatchers.IO) {
-        repository.insertShow(show)
+    fun insertAll(show: ShowEntity) = mScope.launch(Dispatchers.IO) {
+        mShowsModelRepository.insertShow(show)
     }
 
     fun getShows(page: Int): Disposable {
@@ -56,6 +60,6 @@ class ShowsViewModel(application: Application) : BaseViewModel(application) {
 
     override fun onCleared() {
         super.onCleared()
-        parentJob.cancel()
+        mParentJob.cancel()
     }
 }

@@ -1,10 +1,10 @@
-package com.magiag.androidchallenge.view.fragments
+package com.magiag.androidchallenge.view.base
 
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.magiag.androidchallenge.R
-import com.magiag.androidchallenge.viewmodel.BaseViewModel
+import com.magiag.androidchallenge.viewmodel.base.BaseViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

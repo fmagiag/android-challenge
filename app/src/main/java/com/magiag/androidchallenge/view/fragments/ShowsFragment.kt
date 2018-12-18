@@ -6,6 +6,7 @@ import com.magiag.androidchallenge.R
 import com.magiag.androidchallenge.data.entity.ShowEntity
 import com.magiag.androidchallenge.databinding.FragShowsBinding
 import com.magiag.androidchallenge.view.adapters.ShowsAdapter
+import com.magiag.androidchallenge.view.base.BaseFragment
 import com.magiag.androidchallenge.viewmodel.ShowsViewModel
 
 class ShowsFragment : BaseFragment<FragShowsBinding, ShowsViewModel>() {

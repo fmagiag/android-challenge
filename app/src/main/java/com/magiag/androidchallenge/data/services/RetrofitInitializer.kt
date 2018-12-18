@@ -1,6 +1,7 @@
 package com.magiag.androidchallenge.data.services
 
 import com.google.gson.GsonBuilder
+import com.magiag.androidchallenge.data.services.api.TvmazeAPI
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -10,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetrofitInitializer {
 
     val BASE_API = "http://api.tvmaze.com"
-    val retrofit: Retrofit
+    val mRetrofit: Retrofit
 
     init {
         val logging  = HttpLoggingInterceptor()
@@ -24,7 +25,7 @@ class RetrofitInitializer {
                 .addInterceptor(logging )
                 .build()
 
-        retrofit = Retrofit.Builder()
+        mRetrofit = Retrofit.Builder()
                 .baseUrl(BASE_API)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
@@ -33,6 +34,6 @@ class RetrofitInitializer {
     }
 
     fun getTvmazeAPI(): TvmazeAPI {
-        return retrofit.create(TvmazeAPI::class.java)
+        return mRetrofit.create(TvmazeAPI::class.java)
     }
 }

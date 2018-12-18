@@ -9,6 +9,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.magiag.androidchallenge.data.database.converter.Converter
+import com.magiag.androidchallenge.data.database.dao.ShowDao
 import kotlinx.coroutines.CoroutineScope
 
 @Database(entities = [ShowEntity::class], version = 1)
@@ -22,8 +23,7 @@ abstract class ShowRoomDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: ShowRoomDatabase? = null
 
-        fun getDatabase(context: Context,
-                        scope: CoroutineScope): ShowRoomDatabase {
+        fun getDatabase(context: Context): ShowRoomDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                         context.applicationContext,

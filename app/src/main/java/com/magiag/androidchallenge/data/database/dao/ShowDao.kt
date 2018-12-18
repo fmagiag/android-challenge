@@ -1,4 +1,4 @@
-package com.magiag.androidchallenge.data.database
+package com.magiag.androidchallenge.data.database.dao
 
 import com.magiag.androidchallenge.data.entity.ShowEntity
 

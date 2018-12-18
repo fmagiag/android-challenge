@@ -1,24 +1,23 @@
 package com.magiag.androidchallenge.view.activities
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.magiag.androidchallenge.R
+import com.magiag.androidchallenge.databinding.ActMainBinding
+import com.magiag.androidchallenge.view.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActMainBinding>() {
+    lateinit var bind: ActMainBinding
 
+    override fun getContentLayoutId(): Int {
+        return R.layout.act_main
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.act_main)
 
-        val host: NavHostFragment = supportFragmentManager
-                .findFragmentById(R.id.nav_host_fragment) as NavHostFragment? ?: return
-
-        val navController = host.navController
+        bind = binding()
 
         setupBottomNavMenu(navController)
 
@@ -28,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavMenu(navController: NavController) {
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
-        bottomNav?.setupWithNavController(navController)
+        bind.bottomNavView?.setupWithNavController(navController)
     }
 }
