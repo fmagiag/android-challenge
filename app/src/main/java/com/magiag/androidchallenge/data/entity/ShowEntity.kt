@@ -1,7 +1,10 @@
 package com.magiag.androidchallenge.data.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "shows")
 data class ShowEntity(
         @PrimaryKey(autoGenerate = false)
@@ -25,4 +28,4 @@ data class ShowEntity(
         val url: String? = null,
         val webChannel: WebChannelEntity? = null,
         val weight: Int? = null
-)
+) : Parcelable

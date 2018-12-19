@@ -1,5 +1,6 @@
 package com.magiag.androidchallenge.view.fragments
 
+import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.magiag.androidchallenge.R
@@ -7,6 +8,7 @@ import com.magiag.androidchallenge.data.entity.ShowEntity
 import com.magiag.androidchallenge.databinding.FragShowsBinding
 import com.magiag.androidchallenge.view.adapters.ShowsAdapter
 import com.magiag.androidchallenge.view.base.BaseFragment
+import com.magiag.androidchallenge.view.fragments.FragmentInterface.Companion.ARGS_NAVIGATION
 import com.magiag.androidchallenge.viewmodel.ShowsViewModel
 
 class ShowsFragment : BaseFragment<FragShowsBinding, ShowsViewModel>() {
@@ -43,7 +45,8 @@ class ShowsFragment : BaseFragment<FragShowsBinding, ShowsViewModel>() {
     }
 
     private fun onNavDetail(show: ShowEntity) {
-        val action= ShowsFragmentDirections.NavToDetailFromShows()
-        navController.navigate(action)
+        val bundle = Bundle()
+        bundle.putParcelable(ARGS_NAVIGATION, show)
+        navController.navigate(R.id.detailActivity, bundle)
     }
 }
