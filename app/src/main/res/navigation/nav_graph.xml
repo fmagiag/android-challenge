@@ -9,17 +9,23 @@
         android:name="com.magiag.androidchallenge.view.fragments.ShowsFragment"
         android:label="FlowNavigationMenu" >
         <action
-            android:id="@+id/action_shows_navigation_to_detailActivity"
+            android:id="@+id/nav_to_detail_from_shows"
             app:destination="@id/detailActivity" />
+        <argument
+            android:name="flowDetail"
+            app:argType="reference" />
     </fragment>
     <fragment
         android:id="@+id/favorites_navigation"
         android:name="com.magiag.androidchallenge.view.fragments.FavoritesFragment"
         android:label="FlowFavoritesFragment" >
         <action
-            android:id="@+id/action_favorites_navigation_to_detailActivity"
+            android:id="@+id/nav_to_detail_from_favorites"
             app:destination="@id/detailActivity"
             />
+        <argument
+            android:name="flowDetail"
+            app:argType="reference" />
     </fragment>
     <activity
         android:id="@+id/detailActivity"

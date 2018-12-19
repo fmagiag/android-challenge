@@ -19,9 +19,14 @@ import com.magiag.androidchallenge.GlideApp
 class FavoritesAdapter(private val mShows: List<ShowEntity>, private val mContext: Context) : RecyclerView.Adapter<FavoritesAdapter.ViewHolder>() {
 
     private val mOnClickAction = MutableLiveData<ShowEntity>()
+    private val mOnClickItem = MutableLiveData<ShowEntity>()
 
     fun onClickAction(): MutableLiveData<ShowEntity> {
         return mOnClickAction
+    }
+
+    fun onClickItem(): MutableLiveData<ShowEntity> {
+        return mOnClickItem
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesAdapter.ViewHolder {
@@ -30,7 +35,7 @@ class FavoritesAdapter(private val mShows: List<ShowEntity>, private val mContex
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: FavoritesAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val showEntity = mShows[position]
         holder.tvName.text = showEntity.name
         holder.ivAction.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_remove))
@@ -41,6 +46,7 @@ class FavoritesAdapter(private val mShows: List<ShowEntity>, private val mContex
                 .centerCrop()
                 .placeholder(R.drawable.ic_placeholder)
                 .into(holder.ivCover)
+        holder.mView.setOnClickListener { mOnClickItem.postValue(showEntity) }
         holder.ivAction.setOnClickListener {
 
             val builder = AlertDialog.Builder(mContext)
@@ -67,10 +73,9 @@ class FavoritesAdapter(private val mShows: List<ShowEntity>, private val mContex
         return mShows.size
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var ivCover: ImageView = itemView.findViewById(R.id.ivCover)
-        var tvName: TextView = itemView.findViewById(R.id.tvName)
-        var ivAction: ImageView = itemView.findViewById(R.id.ivAction)
+    inner class ViewHolder internal constructor(var mView: View) : RecyclerView.ViewHolder(mView) {
+        var ivCover: ImageView = mView.findViewById(R.id.ivCover)
+        var tvName: TextView = mView.findViewById(R.id.tvName)
+        var ivAction: ImageView = mView.findViewById(R.id.ivAction)
     }
-
 }

@@ -18,9 +18,14 @@ import java.lang.StringBuilder
 class ShowsAdapter(private val mShows: MutableList<ShowEntity>, private val mContext: Context) : RecyclerView.Adapter<ShowsAdapter.ViewHolder>() {
 
     private val mOnClickAction = MutableLiveData<ShowEntity>()
+    private val mOnClickItem = MutableLiveData<ShowEntity>()
 
     fun onClickAction(): MutableLiveData<ShowEntity> {
         return mOnClickAction
+    }
+
+    fun onClickItem(): MutableLiveData<ShowEntity> {
+        return mOnClickItem
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowsAdapter.ViewHolder {
@@ -38,6 +43,7 @@ class ShowsAdapter(private val mShows: MutableList<ShowEntity>, private val mCon
                 .centerCrop()
                 .placeholder(R.drawable.ic_placeholder)
                 .into(holder.ivCover)
+        holder.mView.setOnClickListener { mOnClickItem.postValue(showEntity) }
         holder.ivAction.setOnClickListener {
 
             val message = StringBuilder(showEntity.name)
@@ -59,7 +65,7 @@ class ShowsAdapter(private val mShows: MutableList<ShowEntity>, private val mCon
         notifyItemRangeChanged(position, mShows.size)
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder internal constructor(var mView: View) : RecyclerView.ViewHolder(mView) {
         var ivCover: ImageView = itemView.findViewById(R.id.ivCover)
         var tvName: TextView = itemView.findViewById(R.id.tvName)
         var ivAction: ImageView = itemView.findViewById(R.id.ivAction)

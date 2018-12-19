@@ -28,14 +28,21 @@ class FavoritesFragment : BaseFragment<FragFavoritesBinding, FavoritesViewModel>
         viewmodel.getAllShows().observe(this, Observer<List<ShowEntity>> { this.onFavoritesResult(it) })
     }
 
-    private fun onFavoritesResult(list: List<ShowEntity>){
+    private fun onFavoritesResult(list: List<ShowEntity>) {
         val adapter = FavoritesAdapter(list, context!!)
-        adapter.onClickAction().observe(this, Observer<ShowEntity> { this.onDeleteShow(it)  })
+        adapter.onClickAction().observe(this, Observer<ShowEntity> { this.onDeleteShow(it) })
+        adapter.onClickItem().observe(this, Observer<ShowEntity> { this.onNavDetail(it) })
         bind.rvList.layoutManager = LinearLayoutManager(context)
         bind.rvList.setHasFixedSize(true)
-        bind.rvList.adapter = adapter }
+        bind.rvList.adapter = adapter
+    }
 
-    private fun onDeleteShow(show: ShowEntity){
+    private fun onDeleteShow(show: ShowEntity) {
         viewmodel.deleteShow(show)
+    }
+
+    private fun onNavDetail(show: ShowEntity) {
+        val action = FavoritesFragmentDirections.navToDetailFromFavorites()
+        navController.navigate(action)
     }
 }

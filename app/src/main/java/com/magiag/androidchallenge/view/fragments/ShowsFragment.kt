@@ -29,14 +29,21 @@ class ShowsFragment : BaseFragment<FragShowsBinding, ShowsViewModel>() {
         viewmodel.getShows(1)
     }
 
-    private fun onShowsResult(list: MutableList<ShowEntity>){
+    private fun onShowsResult(list: MutableList<ShowEntity>) {
         val adapter = ShowsAdapter(list, context!!)
-        adapter.onClickAction().observe(this, Observer<ShowEntity> { this.onSaveShow(it)  })
+        adapter.onClickAction().observe(this, Observer<ShowEntity> { this.onSaveShow(it) })
+        adapter.onClickItem().observe(this, Observer<ShowEntity> { this.onNavDetail(it) })
         bind.rvList.layoutManager = LinearLayoutManager(context)
         bind.rvList.setHasFixedSize(true)
-        bind.rvList.adapter = adapter }
+        bind.rvList.adapter = adapter
+    }
 
-    private fun onSaveShow(show: ShowEntity){
+    private fun onSaveShow(show: ShowEntity) {
         viewmodel.insertShow(show)
+    }
+
+    private fun onNavDetail(show: ShowEntity) {
+        val action= ShowsFragmentDirections.NavToDetailFromShows()
+        navController.navigate(action)
     }
 }
