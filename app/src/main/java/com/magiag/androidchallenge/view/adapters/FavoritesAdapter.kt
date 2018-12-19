@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 
 import com.magiag.androidchallenge.R
@@ -32,7 +33,7 @@ class FavoritesAdapter(private val mShows: List<ShowEntity>, private val mContex
     override fun onBindViewHolder(holder: FavoritesAdapter.ViewHolder, position: Int) {
         val showEntity = mShows[position]
         holder.tvName.text = showEntity.name
-        holder.ivAction.setImageResource(R.drawable.ic_remove)
+        holder.ivAction.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_remove))
 
         GlideApp.with(mContext)
                 .load(showEntity.image!!.medium!!)

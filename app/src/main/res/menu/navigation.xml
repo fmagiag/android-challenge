@@ -3,11 +3,13 @@
 
     <item
         android:id="@+id/shows_navigation"
+        android:iconTint="@android:color/white"
         android:icon="@drawable/ic_shows"
         android:title="@string/title_shows" />
 
     <item
         android:id="@+id/favorites_navigation"
+        android:iconTint="@android:color/white"
         android:icon="@drawable/ic_favorite"
         android:title="@string/title_favorites" />
 
