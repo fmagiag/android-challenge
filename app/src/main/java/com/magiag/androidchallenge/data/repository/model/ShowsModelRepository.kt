@@ -7,15 +7,15 @@ interface ShowsModelRepository {
 
     fun getAllShows(): LiveData<List<ShowEntity>>
 
-    fun deleteAllShows()
+    suspend fun deleteAllShows()
 
     fun getShowById(showId: Int): ShowEntity
 
-    fun insertShow(show: ShowEntity)
+    suspend fun insertShow(show: ShowEntity)
 
-    fun insertAll(shows: List<ShowEntity>)
+    suspend fun insertAll(shows: List<ShowEntity>)
 
-    fun deleteShow(show: ShowEntity)
+    suspend fun deleteShow(show: ShowEntity)
 
     fun getCount(): Int
 }

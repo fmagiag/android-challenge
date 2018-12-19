@@ -10,6 +10,7 @@ import com.magiag.androidchallenge.viewmodel.base.BaseViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 
@@ -26,8 +27,12 @@ class FavoritesViewModel(application: Application) : BaseViewModel(application){
                 .showDao()
         )
     }
+    fun deleteShow(show: ShowEntity) = mScope.launch(Dispatchers.IO) {
+        try { mShowsModelRepository.deleteShow(show) } catch (e: Exception) {
+        }
+    }
 
-    fun getAllShows(): LiveData<List<ShowEntity>>{
+    fun getAllShows() : LiveData<List<ShowEntity>> {
         return mShowsModelRepository.getAllShows()
     }
 }

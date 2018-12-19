@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.MutableLiveData
 
 import com.magiag.androidchallenge.R
 import com.magiag.androidchallenge.data.entity.ShowEntity
@@ -13,6 +14,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.magiag.androidchallenge.GlideApp
 
 class FavoritesAdapter(private val mShows: List<ShowEntity>, private val mContext: Context) : RecyclerView.Adapter<FavoritesAdapter.ViewHolder>() {
+
+    private val mOnClickAction = MutableLiveData<ShowEntity>()
+
+    fun onClickAction(): MutableLiveData<ShowEntity> {
+        return mOnClickAction
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -30,6 +37,7 @@ class FavoritesAdapter(private val mShows: List<ShowEntity>, private val mContex
                 .centerCrop()
                 .placeholder(R.drawable.ic_placeholder)
                 .into(holder.ivCover)
+        holder.ivAction.setOnClickListener{mOnClickAction.postValue(showEntity)}
     }
 
     override fun getItemCount(): Int {

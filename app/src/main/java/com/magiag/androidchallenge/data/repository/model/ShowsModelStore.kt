@@ -1,5 +1,6 @@
 package com.magiag.androidchallenge.data.repository.model
 
+import androidx.annotation.WorkerThread
 import com.magiag.androidchallenge.data.entity.ShowEntity
 
 import androidx.lifecycle.LiveData
@@ -11,7 +12,8 @@ class ShowsModelStore(private val showDao: ShowDao) : ShowsModelRepository {
         return showDao.getAll()
     }
 
-    override fun deleteAllShows() {
+    @WorkerThread
+    override suspend fun deleteAllShows() {
         showDao.deleteAll()
     }
 
@@ -19,15 +21,18 @@ class ShowsModelStore(private val showDao: ShowDao) : ShowsModelRepository {
         return showDao.getShowById(showId)
     }
 
-    override fun insertShow(show: ShowEntity) {
+    @WorkerThread
+    override suspend fun insertShow(show: ShowEntity) {
         showDao.insertShow(show)
     }
 
-    override fun insertAll(shows: List<ShowEntity>) {
+    @WorkerThread
+    override suspend fun insertAll(shows: List<ShowEntity>) {
         showDao.insertAll(shows)
     }
 
-    override fun deleteShow(show: ShowEntity) {
+    @WorkerThread
+    override suspend fun deleteShow(show: ShowEntity) {
         showDao.deleteShow(show)
     }
 

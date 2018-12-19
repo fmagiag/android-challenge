@@ -30,7 +30,12 @@ class FavoritesFragment : BaseFragment<FragFavoritesBinding, FavoritesViewModel>
 
     private fun onFavoritesResult(list: List<ShowEntity>){
         val adapter = FavoritesAdapter(list, context!!)
+        adapter.onClickAction().observe(this, Observer<ShowEntity> { this.onDeleteShow(it)  })
         bind.rvList.layoutManager = LinearLayoutManager(context)
         bind.rvList.setHasFixedSize(true)
         bind.rvList.adapter = adapter }
+
+    private fun onDeleteShow(show: ShowEntity){
+        viewmodel.deleteShow(show)
+    }
 }
