@@ -25,13 +25,18 @@ class ShowsFragment : BaseFragment<FragShowsBinding, ShowsViewModel>() {
     override fun initBinding() {
         bind = binding()
         viewmodel = viewModel()
-        viewmodel.OnShowsResult().observe(this, Observer<List<ShowEntity>> { this.onShowsResult(it) })
+        viewmodel.onShowsResult().observe(this, Observer<List<ShowEntity>> { this.onShowsResult(it) })
         viewmodel.getShows(1)
     }
 
     private fun onShowsResult(list: List<ShowEntity>){
         val adapter = ShowsAdapter(list, context!!)
+        adapter.onClickAction().observe(this, Observer<ShowEntity> { this.onSaveShow(it)  })
         bind.rvList.layoutManager = LinearLayoutManager(context)
         bind.rvList.setHasFixedSize(true)
         bind.rvList.adapter = adapter }
+
+    private fun onSaveShow(show: ShowEntity){
+        viewmodel.insertShow(show)
+    }
 }

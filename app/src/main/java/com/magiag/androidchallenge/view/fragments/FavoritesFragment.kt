@@ -25,10 +25,10 @@ class FavoritesFragment : BaseFragment<FragFavoritesBinding, FavoritesViewModel>
     override fun initBinding() {
         bind = binding()
         viewmodel = viewModel()
-        viewmodel.getAllShows().observe(this, Observer<List<ShowEntity>> { this.OnFavoritesResult(it) })
+        viewmodel.getAllShows().observe(this, Observer<List<ShowEntity>> { this.onFavoritesResult(it) })
     }
 
-    private fun OnFavoritesResult(list: List<ShowEntity>){
+    private fun onFavoritesResult(list: List<ShowEntity>){
         val adapter = FavoritesAdapter(list, context!!)
         bind.rvList.layoutManager = LinearLayoutManager(context)
         bind.rvList.setHasFixedSize(true)

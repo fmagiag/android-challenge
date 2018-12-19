@@ -36,12 +36,15 @@ class ShowsViewModel(application: Application) : BaseViewModel(application) {
         )
     }
 
-    fun OnShowsResult(): MutableLiveData<List<ShowEntity>> {
+    fun onShowsResult(): MutableLiveData<List<ShowEntity>> {
         return mOnShowsResult
     }
 
-    fun insertAll(show: ShowEntity) = mScope.launch(Dispatchers.IO) {
-        mShowsModelRepository.insertShow(show)
+    fun insertShow(show: ShowEntity) = mScope.launch(Dispatchers.IO) {
+        Log.i("ShowsViewModel",show.name)
+        try { mShowsModelRepository.insertShow(show) } catch (e: Exception) {
+            Log.e(ShowsViewModel::class.java.simpleName, e.message)
+        }
     }
 
     fun getShows(page: Int): Disposable {
@@ -50,7 +53,7 @@ class ShowsViewModel(application: Application) : BaseViewModel(application) {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ shows ->
                     mOnShowsResult.postValue(shows)
-                    insertAll(shows.get(0))
+                    insertShow(shows.get(4))
                 }, { e ->
                     Log.e("onError error", e?.message)
                 }, {
