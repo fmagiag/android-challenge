@@ -1,6 +1,7 @@
 package com.magiag.androidchallenge.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.magiag.androidchallenge.data.database.ShowRoomDatabase
 import com.magiag.androidchallenge.data.repository.model.ShowsModelStore
@@ -29,6 +30,7 @@ class FavoritesViewModel(application: Application) : BaseViewModel(application){
     }
     fun deleteShow(show: ShowEntity) = mScope.launch(Dispatchers.IO) {
         try { mShowsModelRepository.deleteShow(show) } catch (e: Exception) {
+            Log.e(FavoritesViewModel::class.java.simpleName, e.message)
         }
     }
 

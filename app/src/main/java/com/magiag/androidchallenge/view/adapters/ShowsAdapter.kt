@@ -6,21 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 
 import com.magiag.androidchallenge.R
 import com.magiag.androidchallenge.data.entity.ShowEntity
 import androidx.recyclerview.widget.RecyclerView
 import com.magiag.androidchallenge.GlideApp
+import java.lang.StringBuilder
 
-class ShowsAdapter(private val mShows: List<ShowEntity>, private val mContext: Context) : RecyclerView.Adapter<ShowsAdapter.ViewHolder>() {
+class ShowsAdapter(private val mShows: MutableList<ShowEntity>, private val mContext: Context) : RecyclerView.Adapter<ShowsAdapter.ViewHolder>() {
 
     private val mOnClickAction = MutableLiveData<ShowEntity>()
 
     fun onClickAction(): MutableLiveData<ShowEntity> {
         return mOnClickAction
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowsAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -37,11 +38,25 @@ class ShowsAdapter(private val mShows: List<ShowEntity>, private val mContext: C
                 .centerCrop()
                 .placeholder(R.drawable.ic_placeholder)
                 .into(holder.ivCover)
-        holder.ivAction.setOnClickListener { mOnClickAction.postValue(showEntity) }
+        holder.ivAction.setOnClickListener {
+
+            val message = StringBuilder(showEntity.name)
+            message.append(" was saved in favorites!")
+
+            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+            removeAt(position)
+            mOnClickAction.postValue(showEntity)
+        }
     }
 
     override fun getItemCount(): Int {
         return mShows.size
+    }
+
+    fun removeAt(position: Int) {
+        mShows.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, mShows.size)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
