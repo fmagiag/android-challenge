@@ -2,10 +2,8 @@ package com.magiag.androidchallenge.view.activities
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import com.magiag.androidchallenge.GlideApp
 import com.magiag.androidchallenge.R
-import com.magiag.androidchallenge.utils.Utils
 import com.magiag.androidchallenge.data.entity.ShowEntity
 import com.magiag.androidchallenge.databinding.ActDetailBinding
 import com.magiag.androidchallenge.view.activities.ActivityInterface.Companion.ARGS_NAVIGATION
@@ -14,6 +12,7 @@ import java.lang.StringBuilder
 import android.content.Intent
 import android.net.Uri
 import android.view.View.GONE
+import com.magiag.androidchallenge.convertHTML
 
 
 class DetailActivity : BaseActivity<ActDetailBinding>() {
@@ -41,11 +40,10 @@ class DetailActivity : BaseActivity<ActDetailBinding>() {
                 .centerCrop()
                 .into(bind.ivCover)
 
-        val screenTitle = StringBuilder("TV Show's: ")
-        screenTitle.append(showEntity.name!!)
+        val screenTitle = StringBuilder("TV Show's: ").append(showEntity.name!!)
 
         bind.tvTitle.text = screenTitle
-        bind.tvSummary.text = Utils.from(showEntity.summary!!)
+        bind.tvSummary.text = convertHTML(showEntity.summary!!)
         if (showEntity.externals!=null){
             bind.btImdp.setOnClickListener {
                 val uri = StringBuilder("https://www.imdb.com/title/")

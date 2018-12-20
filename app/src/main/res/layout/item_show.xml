@@ -9,8 +9,8 @@
         android:id="@+id/ivCover"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/small_margin"
         android:src="@drawable/ic_placeholder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,7 +19,7 @@
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/default_margin"
         android:layout_marginTop="24dp"
         android:fontFamily="sans-serif"
         app:layout_constraintStart_toEndOf="@+id/ivCover"
@@ -30,7 +30,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="@dimen/default_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_save" />
@@ -38,7 +38,7 @@
     <View
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/default_margin"
         android:layout_marginTop="24dp"
         android:background="@color/separator"
         app:layout_constraintStart_toEndOf="@+id/ivCover"

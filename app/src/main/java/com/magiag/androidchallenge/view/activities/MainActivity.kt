@@ -1,6 +1,7 @@
 package com.magiag.androidchallenge.view.activities
 
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.ui.setupWithNavController
 import com.magiag.androidchallenge.R
@@ -16,6 +17,7 @@ class MainActivity : BaseActivity<ActMainBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimary)
 
         bind = binding()
 

@@ -3,7 +3,6 @@ package com.magiag.androidchallenge.view.base
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.NavController
@@ -21,7 +20,6 @@ abstract class BaseActivity<B : ViewDataBinding> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimary);
 
         if (getContentLayoutId() != 0) {
             mViewDataBinding = DataBindingUtil.setContentView(this, getContentLayoutId())
