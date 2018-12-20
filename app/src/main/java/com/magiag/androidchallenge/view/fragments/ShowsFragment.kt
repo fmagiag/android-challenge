@@ -1,6 +1,8 @@
 package com.magiag.androidchallenge.view.fragments
 
 import android.os.Bundle
+import android.view.View.GONE
+import androidx.constraintlayout.solver.GoalRow
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.magiag.androidchallenge.R
@@ -32,6 +34,7 @@ class ShowsFragment : BaseFragment<FragShowsBinding, ShowsViewModel>() {
     }
 
     private fun onShowsResult(list: MutableList<ShowEntity>) {
+        bind.pgLoading.visibility = GONE
         val adapter = ShowsAdapter(list, context!!)
         adapter.onClickAction().observe(this, Observer<ShowEntity> { this.onSaveShow(it) })
         adapter.onClickItem().observe(this, Observer<ShowEntity> { this.onNavDetail(it) })

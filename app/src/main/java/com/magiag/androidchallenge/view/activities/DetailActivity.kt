@@ -2,6 +2,7 @@ package com.magiag.androidchallenge.view.activities
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import com.magiag.androidchallenge.GlideApp
 import com.magiag.androidchallenge.R
 import com.magiag.androidchallenge.utils.Utils
@@ -10,6 +11,9 @@ import com.magiag.androidchallenge.databinding.ActDetailBinding
 import com.magiag.androidchallenge.view.activities.ActivityInterface.Companion.ARGS_NAVIGATION
 import com.magiag.androidchallenge.view.base.BaseActivity
 import java.lang.StringBuilder
+import android.content.Intent
+import android.net.Uri
+import android.view.View.GONE
 
 
 class DetailActivity : BaseActivity<ActDetailBinding>() {
@@ -42,6 +46,17 @@ class DetailActivity : BaseActivity<ActDetailBinding>() {
 
         bind.tvTitle.text = screenTitle
         bind.tvSummary.text = Utils.from(showEntity.summary!!)
+        if (showEntity.externals!=null){
+            bind.btImdp.setOnClickListener {
+                val uri = StringBuilder("https://www.imdb.com/title/")
+                uri.append(showEntity.externals!!.imdb)
+                val viewIntent = Intent("android.intent.action.VIEW",
+                        Uri.parse(uri.toString()))
+                startActivity(viewIntent)
+            }
+        } else{
+            bind.btImdp.visibility = GONE
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
