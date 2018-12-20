@@ -20,6 +20,9 @@ class MainActivity : BaseActivity<ActMainBinding>() {
         bind = binding()
 
         setupBottomNavMenu(navController)
+        setSupportActionBar(bind.toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             resources.getResourceName(destination.id)
