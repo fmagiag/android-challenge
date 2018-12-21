@@ -1,7 +1,7 @@
 # Android Test
 
 ## Architecture:
-<img src="/assets/architecture.png" width="100%">
+![resize()](assets/architecture.png)
 
 ## Libraries:
 - [Navigation Architecture Component] (https://developer.android.com/topic/libraries/architecture/navigation/)
