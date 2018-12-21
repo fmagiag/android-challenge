@@ -3,6 +3,9 @@
 ## Architecture:
 ![resize()](assets/architecture.png)
 
+## Architecture:
+![resize()](assets/navigation.png)
+
 ## Libraries:
 - [Navigation Architecture Component] (https://developer.android.com/topic/libraries/architecture/navigation/)
 - [Room Persistence Library ] (https://developer.android.com/topic/libraries/architecture/room)
