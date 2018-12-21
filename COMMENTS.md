@@ -3,7 +3,7 @@
 ## Architecture:
 ![resize()](assets/architecture.png)
 
-## Architecture:
+## Navigation:
 ![resize()](assets/navigation.PNG)
 
 ## Libraries:
