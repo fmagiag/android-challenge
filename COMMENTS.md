@@ -21,3 +21,13 @@
 - [Kotlin] (https://kotlinlang.org/docs/reference/android-overview.html)
 - [Coroutines] (https://kotlinlang.org/docs/reference/coroutines-overview.html)
 - [Junit] (https://github.com/junit-team/junit5/)
+
+## Test:
+
+- validateShowsService: Validate if the request is returning data;
+
+## TODO:
+
+- To implement test with Expresso or Robolectric 
+- To implement test with Mockito
+- To implement animation with transition between of screens and elements
