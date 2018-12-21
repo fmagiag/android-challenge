@@ -1,11 +1,13 @@
 package com.magiag.androidchallenge.view.fragments
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View.GONE
-import androidx.constraintlayout.solver.GoalRow
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.magiag.androidchallenge.R
+import com.magiag.androidchallenge.*
 import com.magiag.androidchallenge.data.entity.ShowEntity
 import com.magiag.androidchallenge.databinding.FragShowsBinding
 import com.magiag.androidchallenge.view.adapters.ShowsAdapter
@@ -13,6 +15,7 @@ import com.magiag.androidchallenge.view.base.BaseFragment
 import com.magiag.androidchallenge.view.fragments.FragmentInterface.Companion.ARGS_NAVIGATION
 import com.magiag.androidchallenge.view.fragments.FragmentInterface.Companion.ARGS_SAVE
 import com.magiag.androidchallenge.viewmodel.ShowsViewModel
+import com.magiag.androidchallenge.viewmodel.ShowsViewModel.ShowsError
 
 class ShowsFragment : BaseFragment<FragShowsBinding, ShowsViewModel>() {
 
@@ -31,6 +34,8 @@ class ShowsFragment : BaseFragment<FragShowsBinding, ShowsViewModel>() {
         bind = binding()
         viewmodel = viewModel()
         viewmodel.onShowsResult().observe(this, Observer<MutableList<ShowEntity>> { this.onShowsResult(it) })
+        viewmodel.onShowsError().observe(this, Observer<ShowsError> { this.onShowsError(it) })
+        viewmodel.onSavingShowsError().observe(this, Observer<ShowEntity> { this.onSavingShowsError(it) })
         viewmodel.getShows(1)
     }
 
@@ -53,5 +58,33 @@ class ShowsFragment : BaseFragment<FragShowsBinding, ShowsViewModel>() {
         bundle.putParcelable(ARGS_NAVIGATION, show)
         bundle.putBoolean(ARGS_SAVE, true)
         navController.navigate(R.id.detailActivity, bundle)
+    }
+
+    private fun onShowsError(error: ShowsError?){
+        if(error == ShowsError.UNEXPECTED_ERROR){
+            val dialog = showsErrorDialog()
+            dialog.show()
+        }
+    }
+
+    private fun onSavingShowsError(show: ShowEntity){
+            val dialog = saveErrorDialog(show)
+            dialog.show()
+    }
+
+    private fun showsErrorDialog(): AlertDialog {
+        val onClickListener = DialogInterface.OnClickListener { dialog, _ ->
+            viewmodel.getShows(1)
+            dialog.dismiss()
+        }
+        return getShowsErrorDialog(context!!, onClickListener).create()
+    }
+
+    private fun saveErrorDialog(show: ShowEntity): AlertDialog {
+        val onClickListener = DialogInterface.OnClickListener { dialog, _ ->
+            viewmodel.insertShow(show)
+            dialog.dismiss()
+        }
+        return savingErrorDialog(context!!, onClickListener).create()
     }
 }

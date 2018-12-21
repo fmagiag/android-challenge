@@ -2,6 +2,7 @@ package com.magiag.androidchallenge.viewmodel
 
 import android.app.Application
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.magiag.androidchallenge.data.database.ShowRoomDatabase
 import com.magiag.androidchallenge.data.repository.model.ShowsModelStore
@@ -23,6 +24,8 @@ import kotlin.coroutines.CoroutineContext
 
 class ShowsViewModel(application: Application) : BaseViewModel(application) {
     private val mOnShowsResult = MutableLiveData<MutableList<ShowEntity>>()
+    private val mOnShowsError = MutableLiveData<ShowsError>()
+    private val mOnSavingShowsError = MutableLiveData<ShowEntity>()
     private val mShowList: MutableList<ShowEntity>?
     private val mShowsDataRepository: ShowsDataRepository
     private val mShowsModelRepository: ShowsModelRepository
@@ -44,11 +47,20 @@ class ShowsViewModel(application: Application) : BaseViewModel(application) {
         return mOnShowsResult
     }
 
+    fun onShowsError(): LiveData<ShowsError> {
+        return mOnShowsError
+    }
+
+    fun onSavingShowsError(): LiveData<ShowEntity> {
+        return mOnSavingShowsError
+    }
+
     fun insertShow(show: ShowEntity) = mScope.launch(Dispatchers.IO) {
         try {
             mShowsModelRepository.insertShow(show)
         } catch (e: Exception) {
             Log.e(ShowsViewModel::class.java.simpleName, e.message)
+            mOnSavingShowsError.postValue(show)
         }
     }
 
@@ -59,26 +71,31 @@ class ShowsViewModel(application: Application) : BaseViewModel(application) {
     fun getShows(page: Int): Disposable {
         return mShowsDataRepository.getShows(page)
                 .flatMap { it -> Observable.fromIterable(it) }
-                .filter { isAvaliable(it.id!!)}
+                .filter { isAvaliable(it.id!!) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    mShowList!!.add(it)
-                }, { e ->
-                    Log.e("onError error", e?.message)
-                }, {
-                    mOnShowsResult.postValue(mShowList)
-                })
+                .subscribe({ mShowList!!.add(it) },
+                        {
+                            mOnShowsError.postValue(ShowsError.UNEXPECTED_ERROR)
+                        },
+                        {
+                            mOnShowsResult.postValue(mShowList)
+                        }
+                )
     }
 
-    fun isAvaliable(id: Int):Boolean{
+    fun isAvaliable(id: Int): Boolean {
         val baseShow = getShowById(id)
-        if(baseShow == null) return true
-        return id.compareTo(baseShow.id!!)!=0
+        if (baseShow == null) return true
+        return id.compareTo(baseShow.id!!) != 0
     }
 
     override fun onCleared() {
         super.onCleared()
         mParentJob.cancel()
+    }
+
+    enum class ShowsError {
+        UNEXPECTED_ERROR
     }
 }

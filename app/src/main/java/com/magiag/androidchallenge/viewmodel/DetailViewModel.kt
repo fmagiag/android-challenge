@@ -24,6 +24,8 @@ import kotlin.coroutines.CoroutineContext
 
 class DetailViewModel(application: Application) : BaseViewModel(application) {
     private val mShowsModelRepository: ShowsModelRepository
+    private val mOnSavingShowsError = MutableLiveData<ShowEntity>()
+    private val mOnDeletingShowsError = MutableLiveData<ShowEntity>()
     private var mParentJob = Job()
     private val mCoroutineContext: CoroutineContext
         get() = mParentJob + Dispatchers.Main
@@ -38,6 +40,7 @@ class DetailViewModel(application: Application) : BaseViewModel(application) {
     fun deleteShow(show: ShowEntity) = mScope.launch(Dispatchers.IO) {
         try { mShowsModelRepository.deleteShow(show) } catch (e: Exception) {
             Log.e(FavoritesViewModel::class.java.simpleName, e.message)
+            mOnDeletingShowsError.postValue(show)
         }
     }
 
@@ -46,6 +49,15 @@ class DetailViewModel(application: Application) : BaseViewModel(application) {
             mShowsModelRepository.insertShow(show)
         } catch (e: Exception) {
             Log.e(ShowsViewModel::class.java.simpleName, e.message)
+            mOnSavingShowsError.postValue(show)
         }
+    }
+
+    fun onSavingShowsError(): LiveData<ShowEntity> {
+        return mOnSavingShowsError
+    }
+
+    fun onDeletingShowsError(): LiveData<ShowEntity> {
+        return mOnDeletingShowsError
     }
 }

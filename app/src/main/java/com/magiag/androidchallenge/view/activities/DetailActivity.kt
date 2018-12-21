@@ -1,10 +1,9 @@
 package com.magiag.androidchallenge.view.activities
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.MenuItem
-import com.magiag.androidchallenge.GlideApp
-import com.magiag.androidchallenge.R
 import com.magiag.androidchallenge.data.entity.ShowEntity
 import com.magiag.androidchallenge.databinding.ActDetailBinding
 import com.magiag.androidchallenge.view.activities.ActivityInterface.Companion.ARGS_NAVIGATION
@@ -12,9 +11,11 @@ import java.lang.StringBuilder
 import android.content.Intent
 import android.net.Uri
 import android.view.Menu
+import android.view.View
 import android.view.View.GONE
 import android.widget.Toast
-import com.magiag.androidchallenge.convertHTML
+import androidx.lifecycle.Observer
+import com.magiag.androidchallenge.*
 import com.magiag.androidchallenge.view.activities.ActivityInterface.Companion.ARGS_SAVE
 import com.magiag.androidchallenge.view.base.BaseActivity
 import com.magiag.androidchallenge.viewmodel.DetailViewModel
@@ -53,40 +54,26 @@ class DetailActivity : BaseActivity<ActDetailBinding, DetailViewModel>() {
                 finish()
             }
             R.id.remove_menu -> {
-                val builder = getAlertDialog()
-                val dialog = builder.create()
-
+                val dialog = removeDialog()
                 dialog.show()
             }
             R.id.save_menu -> {
-                val message = StringBuilder(mShowEntity.name).append(" ")
-                        .append(this.getString(R.string.dialog_shows_toast_message))
                 viewmodel.insertShow(mShowEntity)
-
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                showSaveToast(this, mShowEntity.name!!)
                 finish()
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun getAlertDialog(): AlertDialog.Builder {
-        return AlertDialog.Builder(this, R.style.AlertDialogStyle)
-                .setTitle(this.getString(R.string.dialog_favorites_title))
-                .setMessage(this.getString(R.string.dialog_favorites_message))
-                .setPositiveButton(this.getString(
-                        R.string.dialog_favorites_positive_button)) { dialog, _ ->
-                    val message = StringBuilder(mShowEntity.name).append(" ")
-                            .append(this.getString(R.string.dialog_shows_toast_message))
-
-                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-                    viewmodel.deleteShow(mShowEntity)
-                    finish()
-                    dialog.dismiss()
-                }.setNegativeButton(this.getString(
-                        R.string.dialog_favorites_negative_button)) { dialog, _ ->
-                    dialog.dismiss()
-                }
+    private fun removeDialog(): AlertDialog {
+        val onClickListener = DialogInterface.OnClickListener { dialog, _ ->
+            viewmodel.deleteShow(mShowEntity)
+            showDeleteToast(this, mShowEntity.name!!)
+            dialog.dismiss()
+            finish()
+        }
+        return deleteDialog(this, onClickListener).create()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,6 +84,9 @@ class DetailActivity : BaseActivity<ActDetailBinding, DetailViewModel>() {
         setSupportActionBar(bind.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
+
+        viewmodel.onSavingShowsError().observe(this, Observer<ShowEntity> { this.onSavingShowsError(it) })
+        viewmodel.onDeletingShowsError().observe(this, Observer<ShowEntity> { this.onDeletingShowsError(it) })
 
         mShowEntity = intent.extras!!.getParcelable<ShowEntity>(ARGS_NAVIGATION)!!
         isSave = intent.extras!!.getBoolean(ARGS_SAVE)
@@ -122,5 +112,31 @@ class DetailActivity : BaseActivity<ActDetailBinding, DetailViewModel>() {
         } else {
             bind.btImdp.visibility = GONE
         }
+    }
+
+    private fun onSavingShowsError(show: ShowEntity){
+        val dialog = saveErrorDialog(show)
+        dialog.show()
+    }
+
+    private fun onDeletingShowsError(show: ShowEntity){
+        val dialog = deleteErrorDialog(show)
+        dialog.show()
+    }
+
+    private fun saveErrorDialog(show: ShowEntity): AlertDialog {
+        val onClickListener = DialogInterface.OnClickListener { dialog, _ ->
+            viewmodel.insertShow(show)
+            dialog.dismiss()
+        }
+        return savingErrorDialog(this, onClickListener).create()
+    }
+
+    private fun deleteErrorDialog(show: ShowEntity): AlertDialog {
+        val onClickListener = DialogInterface.OnClickListener { dialog, _ ->
+            viewmodel.deleteShow(show)
+            dialog.dismiss()
+        }
+        return deletingErrorDialog(this, onClickListener).create()
     }
 }
