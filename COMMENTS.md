@@ -4,7 +4,7 @@
 ![resize()](assets/architecture.png)
 
 ## Architecture:
-![resize()](assets/navigation.png)
+![resize()](assets/navigation.PNG)
 
 ## Libraries:
 - [Navigation Architecture Component] (https://developer.android.com/topic/libraries/architecture/navigation/)
