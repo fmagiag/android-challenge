@@ -38,7 +38,7 @@ class FavoritesAdapter(private val mShows: List<ShowEntity>, private val mContex
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val showEntity = mShows[position]
         holder.tvName.text = showEntity.name
-        holder.ivAction.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_remove))
+        holder.ivAction.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_save))
 
         GlideApp.with(mContext)
                 .load(showEntity.image!!.medium!!)
@@ -49,20 +49,22 @@ class FavoritesAdapter(private val mShows: List<ShowEntity>, private val mContex
         holder.mView.setOnClickListener { mOnClickItem.postValue(showEntity) }
         holder.ivAction.setOnClickListener {
 
-            val builder = AlertDialog.Builder(mContext)
-                    .setTitle("Confirm deletion!")
-                    .setMessage("Are you sure you want to delete your favorite show?")
-                    .setPositiveButton("YES") { dialog, which ->
-                        val message = StringBuilder(showEntity.name)
-                        message.append(" was removed of the favorites!")
+            val builder = AlertDialog.Builder(mContext, R.style.AlertDialogStyle)
+                    .setTitle(mContext.getString(R.string.dialog_favorites_title))
+                    .setMessage(mContext.getString(R.string.dialog_favorites_message))
+                    .setPositiveButton(mContext.getString(
+                            R.string.dialog_favorites_positive_button)) { dialog, _ ->
+                        val message = StringBuilder(showEntity.name).append(" ")
+                                .append(mContext.getString(R.string.dialog_shows_toast_message))
 
                         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
                         mOnClickAction.postValue(showEntity)
-                    }.setNegativeButton("Cancel") { dialog, _ ->
+                        dialog.dismiss()
+                    }.setNegativeButton(mContext.getString(
+                            R.string.dialog_favorites_negative_button)) { dialog, _ ->
                         dialog.dismiss()
                     }
 
-            builder.create()
             val dialog: AlertDialog = builder.create()
 
             dialog.show()

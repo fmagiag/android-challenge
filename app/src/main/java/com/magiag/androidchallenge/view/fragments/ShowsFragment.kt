@@ -11,6 +11,7 @@ import com.magiag.androidchallenge.databinding.FragShowsBinding
 import com.magiag.androidchallenge.view.adapters.ShowsAdapter
 import com.magiag.androidchallenge.view.base.BaseFragment
 import com.magiag.androidchallenge.view.fragments.FragmentInterface.Companion.ARGS_NAVIGATION
+import com.magiag.androidchallenge.view.fragments.FragmentInterface.Companion.ARGS_SAVE
 import com.magiag.androidchallenge.viewmodel.ShowsViewModel
 
 class ShowsFragment : BaseFragment<FragShowsBinding, ShowsViewModel>() {
@@ -50,6 +51,7 @@ class ShowsFragment : BaseFragment<FragShowsBinding, ShowsViewModel>() {
     private fun onNavDetail(show: ShowEntity) {
         val bundle = Bundle()
         bundle.putParcelable(ARGS_NAVIGATION, show)
+        bundle.putBoolean(ARGS_SAVE, true)
         navController.navigate(R.id.detailActivity, bundle)
     }
 }

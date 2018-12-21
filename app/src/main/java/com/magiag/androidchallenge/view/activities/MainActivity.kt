@@ -6,9 +6,9 @@ import androidx.navigation.NavController
 import androidx.navigation.ui.setupWithNavController
 import com.magiag.androidchallenge.R
 import com.magiag.androidchallenge.databinding.ActMainBinding
-import com.magiag.androidchallenge.view.base.BaseActivity
+import com.magiag.androidchallenge.view.base.BaseDataBindingActivity
 
-class MainActivity : BaseActivity<ActMainBinding>() {
+class MainActivity : BaseDataBindingActivity<ActMainBinding>() {
     lateinit var bind: ActMainBinding
 
     override fun getContentLayoutId(): Int {

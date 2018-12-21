@@ -2,4 +2,14 @@
     <string name="app_name">TV Shows</string>
     <string name="title_shows">Shows</string>
     <string name="title_favorites">Favorites</string>
+    <string name="menu_remove_text">remove</string>
+    <string name="menu_save_text">save</string>
+    <string name="bt_imdp_text">IMDB</string>
+    <string name="dialog_favorites_title">Confirm deletion!</string>
+    <string name="dialog_favorites_message">Are you sure you want to delete your favorite show?</string>
+    <string name="dialog_favorites_positive_button">YES</string>
+    <string name="dialog_favorites_negative_button">Cancel</string>
+    <string name="dialog_favorites_toast_message">was removed of the favorites!</string>
+    <string name="dialog_shows_toast_message">was saved in favorites!"</string>
+
 </resources>

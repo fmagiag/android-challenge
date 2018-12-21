@@ -17,11 +17,13 @@
 
     <style name="AppTheme.White" parent="AppTheme">
         <item name="android:statusBarColor">@android:color/white</item>
-        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="ActionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
         <item name="colorControlNormal">@color/colorPrimary</item>
     </style>
+
+    <style name="AlertDialogStyle" parent="Theme.AppCompat.Light.Dialog"/>
+
 
 </resources>

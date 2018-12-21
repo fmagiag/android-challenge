@@ -9,6 +9,7 @@ import com.magiag.androidchallenge.databinding.FragFavoritesBinding
 import com.magiag.androidchallenge.view.adapters.FavoritesAdapter
 import com.magiag.androidchallenge.view.base.BaseFragment
 import com.magiag.androidchallenge.view.fragments.FragmentInterface.Companion.ARGS_NAVIGATION
+import com.magiag.androidchallenge.view.fragments.FragmentInterface.Companion.ARGS_SAVE
 import com.magiag.androidchallenge.viewmodel.FavoritesViewModel
 
 class FavoritesFragment : BaseFragment<FragFavoritesBinding, FavoritesViewModel>() {
@@ -46,6 +47,7 @@ class FavoritesFragment : BaseFragment<FragFavoritesBinding, FavoritesViewModel>
     private fun onNavDetail(show: ShowEntity) {
         val bundle = Bundle()
         bundle.putParcelable(ARGS_NAVIGATION, show)
+        bundle.putBoolean(ARGS_SAVE, false)
         navController.navigate(R.id.detailActivity, bundle)
     }
 }

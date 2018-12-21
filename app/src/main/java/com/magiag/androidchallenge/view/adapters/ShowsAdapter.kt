@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 
 import com.magiag.androidchallenge.R
@@ -37,6 +38,7 @@ class ShowsAdapter(private val mShows: MutableList<ShowEntity>, private val mCon
     override fun onBindViewHolder(holder: ShowsAdapter.ViewHolder, position: Int) {
         val showEntity = mShows[position]
         holder.tvName.text = showEntity.name
+        holder.ivAction.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_remove))
         GlideApp.with(mContext)
                 .load(showEntity.image!!.medium!!)
                 .skipMemoryCache(true)
@@ -46,8 +48,8 @@ class ShowsAdapter(private val mShows: MutableList<ShowEntity>, private val mCon
         holder.mView.setOnClickListener { mOnClickItem.postValue(showEntity) }
         holder.ivAction.setOnClickListener {
 
-            val message = StringBuilder(showEntity.name)
-            message.append(" was saved in favorites!")
+            val message = StringBuilder(showEntity.name).append(" ")
+                    .append(mContext.getString(R.string.dialog_favorites_toast_message))
 
             Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
             removeAt(position)

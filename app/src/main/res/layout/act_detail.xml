@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@color/colorPrimary"
-                    android:text="IMDB"
+                    android:text="@string/bt_imdp_text"
                     android:textColor="@android:color/white" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
